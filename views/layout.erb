@@ -1,0 +1,27 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://assets.tobys.cloud/styles.css" type="text/css">
+    <link rel="icon" href="https://assets.tobys.cloud/favicon.ico">
+    <title>hivemind.toby.codes</title>
+  </head>
+
+  <body>
+    <div class="container">
+      <header>
+        hivemind
+        <nav>
+          <% if current_user %>
+            <a class="button" href="/logout">log out</a>
+          <% end %>
+        </nav>
+      </header>
+    </div>
+
+    <div class="container">
+      <main><%= yield %></main>
+    </div>
+  </body>
+</html>

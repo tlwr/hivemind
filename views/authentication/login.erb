@@ -1,0 +1,13 @@
+<form method="POST">
+  <%= csrf_token_hidden_input %>
+
+  <label for="username">
+    <input name="username" placeholder="username" type="text" />
+  </label>
+
+  <label for="password">
+    <input name="password" placeholder="password" type="password" />
+  </label>
+
+  <button>login</button>
+</form>
