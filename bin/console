@@ -1,0 +1,16 @@
+#!/usr/bin/env ruby
+
+require "pry"
+require_relative "../hivemind.rb"
+
+env_label = Pry::Helpers::Text.red(ENV.fetch("RACK_ENV", "development"))
+
+Pry.config.prompt = Pry::Prompt.new(
+  "hivemind", "",
+  [
+    proc{ |*args| "hivemind #{env_label} #{Pry::Prompt[:default].wait_proc.call(*args)}" },
+    proc{ |*args| "hivemind #{env_label} #{Pry::Prompt[:default].incomplete_proc.call(*args)}" },
+  ],
+)
+
+Pry.start(binding, quiet: true)
