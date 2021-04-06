@@ -1,15 +1,21 @@
-<div>
+<nav>
   <a href="/epubs/upload">upload new epub</a>
-</div>
+</nav>
 
 <div>
-  found <%= @epubs.count %> epubs
+  <h1>EPubs</h1>
 
-  <ul>
-    <% @epubs.each do |epub| %>
-      <li>
-      <a href="/epubs/<%= epub.id %>"><%= epub.title %> - <%= epub.creator %></a>
-      </li>
-    <% end %>
-  </ul>
+  <p>found <%= @epubs.count %> epubs</p>
+
+  <% @epubs.group_by(&:creator).sort_by { _1 }.each do |creator, epubs| %>
+    <div>
+      <h2><%= creator %></h2>
+
+      <ul>
+        <% epubs.each do |epub| %>
+          <li><a href="/epubs/<%= epub.id %>"><%= epub.title %></a></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
 </div>
