@@ -1,0 +1,9 @@
+<form method="POST" enctype="multipart/form-data">
+  <%= csrf_token_hidden_input %>
+
+  <label for="epub">
+    <input name="epub" type="file" />
+  </label>
+
+  <button>upload</button>
+</form>

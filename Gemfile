@@ -1,5 +1,7 @@
 source "https://rubygems.org"
 
+gem "gepub"
+
 gem "rack-protection"
 gem "sinatra"
 

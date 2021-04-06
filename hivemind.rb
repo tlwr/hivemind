@@ -13,4 +13,5 @@ end
 require_relative "db"
 
 require_relative "authentication"
+require_relative "epubs"
 require_relative "pages"

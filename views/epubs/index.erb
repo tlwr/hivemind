@@ -1,0 +1,15 @@
+<div>
+  <a href="/epubs/upload">upload new epub</a>
+</div>
+
+<div>
+  found <%= @epubs.count %> epubs
+
+  <ul>
+    <% @epubs.each do |epub| %>
+      <li>
+      <a href="/epubs/<%= epub.id %>"><%= epub.title %> - <%= epub.creator %></a>
+      </li>
+    <% end %>
+  </ul>
+</div>
