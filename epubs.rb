@@ -23,6 +23,7 @@ class Hivemind < Sinatra::Base
       title: book.title.content,
       creator: book.creator.content,
       publisher: book.publisher.content,
+      uploader: current_user,
       epub: File.read(tf),
     )
 

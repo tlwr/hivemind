@@ -19,6 +19,8 @@ class User < Sequel::Model
   attr_reader :password
   attr_accessor :password_confirmation
 
+  one_to_many :uploaded_epubs, class: :EPub, key: :uploader_id
+
   def password=(plain)
     @password = plain
     self.password_digest = BCrypt::Password.create(plain, cost: 10)
@@ -38,6 +40,8 @@ class User < Sequel::Model
 end
 
 class EPub < Sequel::Model
+  many_to_one :uploader, class: :User, key: :uploader_id
+
   def tags
     tags_arr.split("\n").reject?(&:empty?)
   end
