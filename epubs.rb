@@ -37,3 +37,9 @@ class Hivemind < Sinatra::Base
     erb :"epubs/show"
   end
 end
+
+class EPub < Sequel::Model
+  def parsed
+    GEPUB::Book.parse StringIO.new(self.epub.to_s)
+  end
+end
