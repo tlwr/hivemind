@@ -18,6 +18,10 @@
             <a class="button" href="/logout">log out</a>
           <% end %>
         </nav>
+
+        <% if current_user %>
+          <p>logged in as <%= current_user.username %></p>
+        <% end %>
       </header>
     </div>
 
