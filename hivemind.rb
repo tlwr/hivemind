@@ -4,6 +4,7 @@ require "rack/protection"
 
 class Hivemind < Sinatra::Base
   enable :sessions
+  set :session_secret, "reuse-dev-sessions" if ENV["RACK_ENV"] == "development"
 
   use Rack::Protection
   use Rack::Protection::AuthenticityToken
