@@ -61,11 +61,15 @@ class EPub < Sequel::Model
     "/epubs/#{id}/href/#{href}"
   end
 
+  def chapters
+    parsed.items.values.select { _1.media_type =~ /html/ }
+  end
+
   def prev_href(item)
-    parsed.items.values.take_while { _1.id != item }.last&.href
+    chapters.take_while { _1.id != item }.last&.href
   end
 
   def next_href(item)
-    parsed.items.values.drop_while { _1.id != item }.drop(1).first&.href
+    chapters.drop_while { _1.id != item }.drop(1).first&.href
   end
 end
