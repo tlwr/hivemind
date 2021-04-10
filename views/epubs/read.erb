@@ -1,0 +1,13 @@
+<div>
+  <h1><%= @epub.title %></h1>
+
+  <a href="/epubs/<%= @epub.id %>">view epub</a>
+</div>
+
+<%= erb :"epubs/_nav" %>
+
+<section>
+  <%= @item.content %>
+</section>
+
+<%= erb :"epubs/_nav" %>

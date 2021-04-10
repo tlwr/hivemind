@@ -1,0 +1,11 @@
+<nav>
+  <table><tbody><tr>
+    <% unless @epub.prev_href(@item.id).nil? %>
+    <td><a href="<%= @epub.href_path(@epub.prev_href(@item.id) ) %>">&larr; prev</a></td>
+    <% end %>
+
+    <% unless @epub.next_href(@item.id).nil? %>
+    <td><a href="<%= @epub.href_path(@epub.next_href(@item.id) ) %>">next &rarr;</a></td>
+    <% end %>
+  </tr></tbody></table>
+</nav>
