@@ -43,7 +43,7 @@ class Hivemind < Sinatra::Base
 
     @item = @epub.parsed.item_by_href(params[:href])
 
-    if @item.media_type =~ /image/
+    if @item.media_type =~ /image/ || @item.media_type =~ /css/
       content_type @item.media_type
       @item.content
     else
