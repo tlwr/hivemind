@@ -5,12 +5,6 @@
   <p><%= @epub.publisher %></p>
 
   <p>uploaded by <%= @epub.uploader.username %></p>
-</div>
 
-<div>
-  <ul>
-    <% @epub.parsed.items.each do |key, item| %>
-      <li><a href="<%= @epub.href_path(item.href) %>"><%= key %></a></li>
-    <% end %>
-  </ul>
+  <p><a href="/epubs/<%= @epub.id %>/read">read epub</a></p>
 </div>
