@@ -1,0 +1,49 @@
+---
+resources:
+  - name: hivemind-src
+    type: git
+    icon: git
+    source:
+      uri: https://github.com/tlwr/hivemind.git
+      branch: main
+
+
+jobs:
+  - name: set-pipeline
+    serial: true
+    plan:
+      - get: hivemind-src
+        trigger: true
+
+      - set_pipeline: hivemind
+        file: hivemind-src/ci/pipeline.yml
+
+  - name: test
+    serial: true
+    public: true
+    plan:
+      - get: hivemind-src
+        passed: [set-pipeline]
+        trigger: true
+
+      - task: test
+        privileged: true
+        config:
+          platform: linux
+
+          image_resource:
+            type: registry-image
+            source:
+              repository: ruby
+
+          inputs:
+            - name: hivemind-src
+              path: .
+
+          run:
+            path: sh
+            args:
+              - -c
+              - |
+                make deps
+                make test
