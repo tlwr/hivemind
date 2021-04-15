@@ -8,17 +8,15 @@
     <div class="grid grid-cols-6 gap-4 items-start border-b py-8">
       <h2 class="col-span-2"><%= creator %></h2>
 
-      <div>
-        <% epubs.each do |epub| %>
-          <a href="/epubs/<%= epub.id %>">
-            <% if epub.cover_href %>
-              <img src="<%= epub.cover_href %>" style="width: 100%" alt="<%= epub.title %>"/>
-            <% else %>
-              <%= epub.title %>
-            <% end %>
-          </a>
-        <% end %>
-      </div>
+      <% epubs.each do |epub| %>
+        <a href="/epubs/<%= epub.id %>">
+          <% if epub.cover_href %>
+            <img src="<%= epub.cover_href %>" style="width: 100%" alt="<%= epub.title %>"/>
+          <% else %>
+            <%= epub.title %>
+          <% end %>
+        </a>
+      <% end %>
     </div>
   <% end %>
 </div>
