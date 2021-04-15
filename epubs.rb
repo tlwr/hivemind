@@ -79,4 +79,9 @@ class EPub < Sequel::Model
   def next_href(item)
     chapters.drop_while { _1.id != item }.drop(1).first&.href
   end
+
+  def cover_href
+    href = parsed.items["cover-image"]&.href
+    href && href_path(href)
+  end
 end

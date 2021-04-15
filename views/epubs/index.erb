@@ -11,11 +11,17 @@
     <div>
       <h2><%= creator %></h2>
 
-      <ul>
+      <div style="display: grid; grid-template-columns: repeat(3, 200px); grid-gap: 25px; align-items: center; text-align: center">
         <% epubs.each do |epub| %>
-          <li><a href="/epubs/<%= epub.id %>"><%= epub.title %></a></li>
+          <a href="/epubs/<%= epub.id %>">
+            <% if epub.cover_href %>
+              <img src="<%= epub.cover_href %>" style="width: 100%" alt="<%= epub.title %>"/>
+            <% else %>
+              <%= epub.title %>
+            <% end %>
+          </a>
         <% end %>
-      </ul>
+      </div>
     </div>
   <% end %>
 </div>
