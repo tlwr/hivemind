@@ -41,7 +41,7 @@ class Hivemind < Sinatra::Base
     @epub = EPub.find(id: params[:epub_id])
     raise Sinatra::NotFound if @epub.nil?
 
-    redirect "/epubs/#{@epub.id}/href/#{@epub.parsed.items.values.first.href}"
+    redirect "/epubs/#{@epub.id}/href/#{@epub.parsed.items.values.first.href}#read-start"
   end
 
   get %r(/epubs/(?<epub_id>\d+)/href/(?<href>.*)) do
