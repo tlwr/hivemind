@@ -5,10 +5,11 @@
   </header>
 
   <% @epubs.group_by(&:creator).sort_by { _1 }.each do |creator, epubs| %>
-    <div class="grid grid-cols-6 gap-4 items-start border-b py-8">
-      <h2 class="col-span-2"><%= creator %></h2>
+    <div class="grid grid-cols-6 gap-8 items-start border-b py-8">
+      <h2 class="text-2xl text-gray-500 col-span-2"><%= creator %></h2>
 
-      <% epubs.each do |epub| %>
+
+      <% epubs.each do |epub| # the 4n+1 book are going to need `col-start-3` class added to the a tag %>
         <a href="/epubs/<%= epub.id %>">
           <% if epub.cover_href %>
             <img src="<%= epub.cover_href %>" style="width: 100%" alt="<%= epub.title %>"/>
