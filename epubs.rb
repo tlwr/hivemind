@@ -41,7 +41,7 @@ class Hivemind < Sinatra::Base
     @epub = EPub.find(id: params[:epub_id])
     raise Sinatra::NotFound if @epub.nil?
 
-    redirect "/epubs/#{@epub.id}/href/#{@epub.parsed.items.values.first.href}#read-start"
+    redirect "/epubs/#{@epub.id}/href/#{@epub.first_readable.href}#read-start"
   end
 
   get %r(/epubs/(?<epub_id>\d+)/href/(?<href>.*)) do
@@ -83,5 +83,16 @@ class EPub < Sequel::Model
   def cover_href
     href = parsed.items["cover-image"]&.href
     href && href_path(href)
+  end
+
+  def first_readable
+    item_keys = parsed.items.values
+    item_keys.find { |v| v.id =~ /cover/i } ||
+    item_keys.find { |v| v.id =~ /toc/i } ||
+    item_keys.find { |v| v.id =~ /contents/i } ||
+    item_keys.find { |v| v.id =~ /preface/i } ||
+    item_keys.find { |v| v.id =~ /foreword/i } ||
+    item_keys.find { |v| v.id =~ /chapter/i } ||
+    item_keys.first
   end
 end
