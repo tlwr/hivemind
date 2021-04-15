@@ -12,16 +12,15 @@
     <div class="container">
       <header>
         hivemind
-        <nav>
+
+        <nav style="display: flex; flex-direction: row; justify-content: space-between">
           <% if current_user %>
-            <a class="button" href="/epubs">epubs</a>
+            <a class="button" href="/epubs">books</a>
+            <a href="/epubs/upload">upload book</a>
+            <a>@<%= current_user.username %></a>
             <a class="button" href="/logout">log out</a>
           <% end %>
         </nav>
-
-        <% if current_user %>
-          <p>logged in as <%= current_user.username %></p>
-        <% end %>
       </header>
     </div>
 
