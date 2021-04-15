@@ -1,13 +1,15 @@
-<form method="POST">
+<form method="POST" class="max-w-xs mx-auto flex flex-col items-center">
   <%= csrf_token_hidden_input %>
 
-  <label for="username">
-    <input name="username" placeholder="username" type="text" />
+  <label for="username" class="sr-only">
+    username
   </label>
+  <input name="username" placeholder="username" type="text" class="w-full mt-6 p-4 border border-gray-400 focus:border-indigo-500 outline-none focus:ring ring-indigo-200" />
 
-  <label for="password">
-    <input name="password" placeholder="password" type="password" />
+  <label for="password" class="sr-only">
+    password
   </label>
+  <input name="password" placeholder="password" type="password" class="w-full mt-6 p-4 border border-gray-400 focus:border-indigo-500 outline-none focus:ring ring-indigo-200" />
 
-  <button>login</button>
+  <button class="w-full mt-6 p-4 uppercase tracking-widest bg-indigo-500 hover:bg-indigo-700 text-white outline-none focus:ring ring-indigo-200">Login</button>
 </form>

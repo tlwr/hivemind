@@ -1,9 +1,12 @@
-<form method="POST" enctype="multipart/form-data">
+<form method="POST" enctype="multipart/form-data" class="max-w-xs mx-auto flex flex-col items-start">
   <%= csrf_token_hidden_input %>
 
-  <label for="epub">
-    <input name="epub" type="file" />
-  </label>
+  <fieldset class="border p-4">
+    <label for="epub" class="">
+      Upload a .epub file
+    </label>
+    <input id="epub" name="epub" type="file" class="mt-8" />
+  </fieldset>
 
-  <button>upload</button>
+  <button class="w-full mt-6 p-4 uppercase tracking-widest bg-indigo-500 hover:bg-indigo-700 text-white outline-none focus:ring ring-indigo-200">Upload</button>
 </form>

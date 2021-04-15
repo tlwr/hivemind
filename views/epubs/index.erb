@@ -1,13 +1,14 @@
 <div>
-  <h1>EPubs</h1>
-
-  <p>found <%= @epubs.count %> epubs</p>
+  <header class="flex mb-32 items-end">
+    <h1 class="text-4xl mr-8">EPubs</h1>
+    <p class="text-gray-500">found <%= @epubs.count %> epubs</p>
+  </header>
 
   <% @epubs.group_by(&:creator).sort_by { _1 }.each do |creator, epubs| %>
-    <div>
-      <h2><%= creator %></h2>
+    <div class="grid grid-cols-6 gap-4 items-start border-b py-8">
+      <h2 class="col-span-2"><%= creator %></h2>
 
-      <div style="display: grid; grid-template-columns: repeat(3, 200px); grid-gap: 25px; align-items: center; text-align: center">
+      <div>
         <% epubs.each do |epub| %>
           <a href="/epubs/<%= epub.id %>">
             <% if epub.cover_href %>
