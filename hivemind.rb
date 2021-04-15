@@ -6,6 +6,9 @@ class Hivemind < Sinatra::Base
   enable :sessions
   set :session_secret, "reuse-dev-sessions" if ENV["RACK_ENV"] == "development"
 
+  set :static, true
+  set :public_folder, Proc.new { File.join(root, "static") }
+
   use Rack::Protection
   use Rack::Protection::AuthenticityToken
 end
