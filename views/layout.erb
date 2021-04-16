@@ -8,8 +8,8 @@
     <title>hivemind</title>
   </head>
 
-  <body class="font-serif min-h-screen p-4 lg:px-8 bg-gray-50">
-    <div class="max-w-6xl mx-auto">
+  <body class="font-serif min-h-screen p-4 lg:px-8 bg-gray-50 flex flex-col items-stretch">
+    <div class="w-full max-w-6xl mx-auto">
       <header>
         <nav class="flex justify-between items-end mb-8 border-b pb-4">
           <h1 class="text-2xl lg:text-4xl mr-8 lg:mr-16">🐝🧠 <span class="sr-only">Hive mind</span></h1>
@@ -25,11 +25,11 @@
       </header>
     </div>
 
-    <div class="max-w-6xl mx-auto mt-16">
-      <main><%= yield %></main>
-    </div>
+    <main class="w-full max-w-6xl mx-auto flex-grow h-full flex flex-col justify-between ">
+      <%= yield %>
+    </main>
 
-    <footer class="max-w-6xl mx-auto mt-16 py-4 border-t text-sm">
+    <footer class="w-full max-w-6xl mx-auto mt-16 py-4 border-t text-sm">
       <a class="underline hover:text-indigo-500" href="https://github.com/tlwr/hivemind">GitHub</a>
     </footer>
   </body>
