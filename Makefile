@@ -11,3 +11,6 @@ deps:
 
 run:
 	bundle exec rackup
+
+console:
+	./bin/console
