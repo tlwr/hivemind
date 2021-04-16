@@ -12,7 +12,11 @@
       <% epubs.each do |epub| # the 4n+1 book are going to need `col-start-3` class added to the a tag %>
         <a href="/epubs/<%= epub.id %>">
           <% if epub.cover_href %>
-            <img src="<%= epub.cover_href %>" style="width: 100%" alt="<%= epub.title %>"/>
+            <img src="<%= epub.cover_href %>"
+                 style="width: 100%; height: auto;"
+                 alt="<%= epub.title %>"
+                 title="<%= epub.title %>"
+                 />
           <% else %>
             <%= epub.title %>
           <% end %>
