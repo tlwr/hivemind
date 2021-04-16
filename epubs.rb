@@ -72,6 +72,10 @@ class EPub < Sequel::Model
     parsed.items.values.select { _1.media_type =~ /html/ }
   end
 
+  def images
+    parsed.items.values.select { _1.media_type =~ /jpeg/i || _1.media_type =~ /png/i }
+  end
+
   def prev_href(item)
     chapters.take_while { _1.id != item }.last&.href
   end
@@ -81,7 +85,7 @@ class EPub < Sequel::Model
   end
 
   def cover_href
-    href = parsed.items["cover-image"]&.href
+    href = images.select { |i| i.id =~ /cover/i }.first&.href
     href && href_path(href)
   end
 
