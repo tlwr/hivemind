@@ -44,7 +44,7 @@ RSpec.describe "users" do
 
         expect(last_response).not_to be_redirect
         expect(last_response).to be_ok
-        expect(last_response.body).to match(%r(button.+login))
+        expect(last_response.body).to match(%r(button.+Login))
       end
     end
 
@@ -69,7 +69,7 @@ RSpec.describe "users" do
 
           expect(last_response).not_to be_redirect
           expect(last_response).to be_ok
-          expect(last_response.body).to match(%r(button.+login))
+          expect(last_response.body).to match(%r(button.+Login))
         end
       end
 
