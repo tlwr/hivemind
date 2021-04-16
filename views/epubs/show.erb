@@ -6,12 +6,12 @@
     <p class="text-lg"><%= @epub.publisher %></p>
 
     <p class="mt-4">Uploaded by @<%= @epub.uploader.username %></p>
-    
+
     <a class="mt-4 inline-block p-4 uppercase tracking-widest bg-indigo-500 hover:bg-indigo-700 text-white outline-none focus:ring ring-indigo-200" href="/epubs/<%= @epub.id %>/read">read epub</a>
   </div>
   <div class="">
     <% if @epub.cover_href %>
-      <img class="max-w-md" src="<%= @epub.cover_href %>" alt="<%= @epub.title %>"/>
+      <img class="max-w-md" src="<%= @epub.cover_href %>?read#read-start" alt="<%= @epub.title %>"/>
     <% end %>
   </div>
 </div>

@@ -14,7 +14,13 @@
     margin-top: 1em !important;
   }
   </style>
-  <%= @item.content %>
+
+  <iframe src="<%= @epub.href_path(@item.href) %>"
+          type="<%= @item.media_type %>"
+          style="width: 100%;"
+          onload="this.height = this.contentWindow.document.body.scrollHeight"
+          id="embedded-content">
+  </iframe>
 </section>
 
 <%= erb :"epubs/_nav" %>

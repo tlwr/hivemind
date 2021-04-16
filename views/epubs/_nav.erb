@@ -4,7 +4,7 @@
       <% if @epub.prev_href(@item.id).nil? %>
       <span>⇤</span>
       <% else %>
-      <a href="<%= @epub.href_path(@epub.prev_href(@item.id) ) %>#read-start">←</a>
+      <a href="<%= @epub.href_path(@epub.prev_href(@item.id) ) %>?read#read-start">←</a>
       <% end %>
     </td>
 
@@ -12,7 +12,7 @@
       <% if @epub.next_href(@item.id).nil? %>
       <span>⇥</span>
       <% else %>
-      <a href="<%= @epub.href_path(@epub.next_href(@item.id) ) %>#read-start">→</a>
+      <a href="<%= @epub.href_path(@epub.next_href(@item.id) ) %>?read#read-start">→</a>
       <% end %>
     </td>
   </tr></tbody></table>
