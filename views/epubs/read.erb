@@ -18,7 +18,8 @@
   <iframe src="<%= @epub.href_path(@item.href) %>"
           type="<%= @item.media_type %>"
           style="width: 100%;"
-          onload="this.height = this.contentWindow.document.body.scrollHeight"
+          scrolling="no"
+          onload="let b = this.contentWindow.document.body; this.height = Math.abs(b.getBoundingClientRect().top) + b.scrollHeight"
           id="embedded-content">
   </iframe>
 </section>
