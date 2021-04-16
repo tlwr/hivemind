@@ -86,13 +86,12 @@ class EPub < Sequel::Model
   end
 
   def first_readable
-    item_keys = parsed.items.values
-    item_keys.find { |v| v.id =~ /cover/i } ||
-    item_keys.find { |v| v.id =~ /toc/i } ||
-    item_keys.find { |v| v.id =~ /contents/i } ||
-    item_keys.find { |v| v.id =~ /preface/i } ||
-    item_keys.find { |v| v.id =~ /foreword/i } ||
-    item_keys.find { |v| v.id =~ /chapter/i } ||
-    item_keys.first
+    chapters.find { |v| v.id =~ /cover/i } ||
+    chapters.find { |v| v.id =~ /toc/i } ||
+    chapters.find { |v| v.id =~ /contents/i } ||
+    chapters.find { |v| v.id =~ /preface/i } ||
+    chapters.find { |v| v.id =~ /foreword/i } ||
+    chapters.find { |v| v.id =~ /chapter/i } ||
+    chapters.first
   end
 end
