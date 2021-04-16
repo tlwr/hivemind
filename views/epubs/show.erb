@@ -1,10 +1,17 @@
-<div>
-  <h1><%= @epub.title %></h1>
+<div class="flex justify-between">
+  <div class="mr-8">
+    <h1 class="text-4xl max-w-xl text-gray-500"><%= @epub.title %></h1>
 
-  <p><%= @epub.creator %></p>
-  <p><%= @epub.publisher %></p>
+    <h2 class="mt-4 text-xl"><%= @epub.creator %></h2>
+    <p class="text-lg"><%= @epub.publisher %></p>
 
-  <p>uploaded by @<%= @epub.uploader.username %></p>
-
-  <p><a href="/epubs/<%= @epub.id %>/read">read epub</a></p>
+    <p class="mt-4">Uploaded by @<%= @epub.uploader.username %></p>
+    
+    <a class="mt-4 inline-block p-4 uppercase tracking-widest bg-indigo-500 hover:bg-indigo-700 text-white outline-none focus:ring ring-indigo-200" href="/epubs/<%= @epub.id %>/read">read epub</a>
+  </div>
+  <div class="">
+    <% if @epub.cover_href %>
+      <img class="max-w-md" src="<%= @epub.cover_href %>" alt="<%= @epub.title %>"/>
+    <% end %>
+  </div>
 </div>
