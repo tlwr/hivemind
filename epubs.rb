@@ -19,10 +19,12 @@ class Hivemind < Sinatra::Base
       book = GEPUB::Book.parse(f)
     end
 
+    title = book&.title&.content || "Unknown title"
+    creator = book&.creator&.content || "Unknown creator"
+    publisher = book&.publisher&.content || "Unknown publisher"
+
     epub = EPub.create(
-      title: book.title.content,
-      creator: book.creator.content,
-      publisher: book.publisher.content,
+      title: title, creator: creator, publisher: publisher,
       uploader: current_user,
       epub: File.read(tf),
     )
