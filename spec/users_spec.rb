@@ -88,7 +88,7 @@ RSpec.describe "users" do
 
           expect(last_response).not_to be_redirect
           expect(last_response).to be_ok
-          expect(last_response.body).to match(%r(found \d+ epubs))
+          expect(last_response.body).to match(%r(\d+ books in library))
         end
       end
     end
