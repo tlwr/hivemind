@@ -33,6 +33,13 @@ resources:
       username: ((docker-secrets.username))
       password: ((docker-secrets.password))
 
+  - name: cloud-cfg
+    type: git
+    icon: git
+    source:
+      branch: main
+      uri: https://github.com/tlwr/www.tobys.cloud.git
+
 jobs:
   - name: test
     serial: true
@@ -107,3 +114,62 @@ jobs:
           additional_tags: hivemind-src/.git/ref
         get_params:
           skip_download: true
+
+  - name: deploy
+    serial: true
+    plan:
+      - get: hivemind-img
+        trigger: true
+        passed: [build]
+        params:
+          skip_download: true
+
+      - get: hivemind-src
+        passed: [build]
+
+      - get: cloud-cfg
+
+      - task: add-tag-to-kubeyaml
+        privileged: true
+        config:
+          platform: linux
+
+          image_resource:
+            type: registry-image
+            source:
+              repository: alpine
+              tag: 3.12
+
+          inputs:
+            - name: hivemind-src
+
+          outputs:
+            - name: kubeyaml
+
+          run:
+            path: ash
+            args:
+              - -e
+              - -u
+              - -x
+              - -c
+              - |
+                tag="$(cat hivemind-src/.git/ref)"
+
+                sed \
+                  "s/@tag/$tag/" \
+                  hivemind-src/k8s/02-hivemind.yaml > kubeyaml/kubeyaml.yaml
+
+      - task: kubectl-apply
+        file: cloud-cfg/concourse/tasks/kubectl-apply.yaml
+        params:
+          KUBEYAML_PATH: kubeyaml.yaml
+          KUBE_CONFIG: ((hivemind-k8s.kube-config))
+          NAMESPACE: hivemind
+
+      - task: kubectl-rollout-restart
+        file: cloud-cfg/concourse/tasks/kubectl-rollout-restart.yaml
+        params:
+          KUBE_CONFIG: ((hivemind-k8s.kube-config))
+          RESOURCE: statefulset/hivemind
+          NAMESPACE: hivemind
