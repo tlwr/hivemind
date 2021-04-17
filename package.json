@@ -11,7 +11,8 @@
     "tailwindcss": "^2.1.1"
   },
   "scripts": {
-    "css": "postcss css/style.css -o static/style.css -w --verbose"
+    "css": "postcss css/style.css -o static/style.css -w --verbose",
+    "css:build": "postcss css/style.css -o static/style.css --verbose"
   },
   "repository": {
     "type": "git",
