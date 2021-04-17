@@ -1,7 +1,7 @@
 ARG ruby_version
 FROM ruby:$ruby_version
 
-RUN apk add --no-cache build-base ruby-dev
+RUN apk add --no-cache build-base ruby-dev sqlite
 
 RUN mkdir -p /opt/hivemind/app
 WORKDIR /opt/hivemind/app
