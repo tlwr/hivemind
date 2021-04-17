@@ -12,7 +12,7 @@
   },
   "scripts": {
     "css": "postcss css/style.css -o static/style.css -w --verbose",
-    "css:build": "postcss css/style.css -o static/style.css --verbose"
+    "css:build": "NODE_ENV=production postcss css/style.css -o static/style.css --verbose"
   },
   "repository": {
     "type": "git",
