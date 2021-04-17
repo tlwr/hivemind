@@ -5,6 +5,7 @@ require "time"
 def db_filepath
   {
     "development" => "sqlite:///tmp/hivemind-development.db",
+    "production" => "/opt/hivemind/fs/hivemind-production.db",
   }.fetch(ENV.fetch("RACK_ENV", "development"))
 end
 
