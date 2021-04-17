@@ -2,6 +2,7 @@ require "sinatra"
 
 class Hivemind < Sinatra::Base
   UNAUTHENTICATED_PATHS = Regexp.union(
+    %r(/health),
     %r(^/login$), %r(^/logout$),
   )
 
