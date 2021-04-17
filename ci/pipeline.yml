@@ -1,5 +1,23 @@
 ---
+resource_types:
+  - name: registry-tag
+    type: registry-image
+    source:
+      repository: tlwr/registry-tag-resource
+      tag: 1593696431
+
 resources:
+  - name: ruby-img-tag
+    type: registry-tag
+    icon: tag
+    check_every: 15m
+    source:
+      uri: https://hub.docker.com/v2/repositories/library/ruby
+      pages: 3
+      regexp: '^[0-9]+[.][0-9]+[.][0-9]+-alpine$'
+      semver:
+        matcher: '>= 3.0'
+
   - name: hivemind-src
     type: git
     icon: git
@@ -7,6 +25,13 @@ resources:
       uri: https://github.com/tlwr/hivemind.git
       branch: main
 
+  - name: hivemind-img
+    type: registry-image
+    icon: docker
+    source:
+      repository: ghcr.io/tlwr/hivemind
+      username: ((docker-secrets.username))
+      password: ((docker-secrets.password))
 
 jobs:
   - name: test
@@ -37,3 +62,48 @@ jobs:
               - |
                 make deps
                 make test
+
+  - name: build
+    serial: true
+    public: true
+    plan:
+      - get: hivemind-src
+        passed: [test]
+        trigger: true
+
+      - get: ruby-img-tag
+        trigger: true
+
+      - load_var: ruby-version
+        file: ruby-img-tag/tag
+
+      - task: build-img
+        privileged: true
+        config:
+          platform: linux
+
+          image_resource:
+            type: registry-image
+            source:
+              repository: vito/oci-build-task
+              tag: 0.3.0
+
+          inputs:
+            - name: hivemind-src
+              path: .
+
+          outputs:
+            - name: image
+
+          params:
+            BUILD_ARG_ruby_version: ((.:ruby-version))
+
+          run:
+            path: build
+
+      - put: hivemind-img
+        params:
+          image: image/image.tar
+          additional_tags: hivemind-src/.git/ref
+        get_params:
+          skip_download: true
