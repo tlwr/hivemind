@@ -15,6 +15,7 @@ COPY $PWD/package.json .
 
 RUN npm install
 
+COPY $PWD/postcss.config.js .
 COPY $PWD/css/style.css ./css/style.css
 RUN npm run css:build
 
