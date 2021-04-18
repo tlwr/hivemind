@@ -2,6 +2,7 @@ require "sinatra"
 
 class Hivemind < Sinatra::Base
   get "/me" do
-    erb :"users/me"
+    @user = current_user
+    erb :"users/show"
   end
 end
