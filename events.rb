@@ -1,13 +1,9 @@
 require "sinatra"
 
 class Hivemind < Sinatra::Base
-  get "/events" do
+  get "/activity" do
     @latest = Event.last(25)
     erb :"events/index"
-  end
-
-  get "/activity" do
-    redirect "/events"
   end
 end
 
