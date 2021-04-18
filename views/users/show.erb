@@ -1,6 +1,6 @@
 <div>
   <header class="flex mb-32 items-end">
-    <h1 class="text-4xl mr-8">@<%= current_user.username %></h1>
+    <h1 class="text-4xl mr-8">@<%= @user.username %></h1>
   </header>
 
   <div class="flex justify-between">
@@ -9,17 +9,17 @@
         <h2 class="lg:text-2xl text-gray-500">Uploaded</h2>
 
         <p class="mt-4">
-        <% if current_user.uploaded_epubs.empty? %>
+        <% if @user.uploaded_epubs.empty? %>
           No books
-        <% elsif current_user.uploaded_epubs.size == 1 %>
+        <% elsif @user.uploaded_epubs.size == 1 %>
           1 book
         <% else %>
-          <%= current_user.uploaded_epubs.size %> books
+          <%= @user.uploaded_epubs.size %> books
         <% end %>
         </p>
       </div>
 
-      <% current_user.uploaded_epubs.sort_by(&:creator).each do |epub| %>
+      <% @user.uploaded_epubs.sort_by(&:creator).each do |epub| %>
         <a href="/epubs/<%= epub.id %>">
           <% if epub.cover_href %>
             <img src="<%= epub.cover_href %>"
