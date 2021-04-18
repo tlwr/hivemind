@@ -1,0 +1,24 @@
+<div>
+  <header class="flex mb-32 items-end">
+    <h1 class="text-4xl mr-8">@<%= current_user.username %></h1>
+  </header>
+
+  <div class="flex justify-between">
+    <div class="grid grid-cols-3 lg:grid-cols-6 gap-8 items-start border-t py-8">
+      <h2 class="lg:text-2xl text-gray-500 lg:col-span-2">Uploaded</h2>
+      <% current_user.uploaded_epubs.sort_by(&:creator).each do |epub| %>
+        <a href="/epubs/<%= epub.id %>">
+          <% if epub.cover_href %>
+            <img src="<%= epub.cover_href %>"
+                 style="width: 100%; height: auto;"
+                 alt="<%= epub.title %>"
+                 title="<%= epub.title %>"
+                 />
+          <% else %>
+            <%= epub.title %>
+          <% end %>
+        </a>
+      <% end %>
+    </div>
+  </div>
+</div>
