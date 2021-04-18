@@ -5,7 +5,14 @@
     <h2 class="mt-4 text-xl"><%= @epub.creator %></h2>
     <p class="text-lg"><%= @epub.publisher %></p>
 
-    <p class="mt-4">Uploaded by @<%= @epub.uploader.username %></p>
+    <p class="mt-4">
+      Uploaded by
+      <a href="<%= @epub.uploader.show_path %>"
+         class="underline hover:text-indigo-500"
+         >
+        @<%= @epub.uploader.username %>
+      </a>
+    </p>
 
     <a class="mt-4 inline-block p-4 uppercase tracking-widest bg-indigo-500 hover:bg-indigo-700 text-white outline-none focus:ring ring-indigo-200" href="/epubs/<%= @epub.id %>/read">read epub</a>
   </div>
