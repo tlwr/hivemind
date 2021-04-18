@@ -29,6 +29,8 @@ class Hivemind < Sinatra::Base
       epub: File.read(tf),
     )
 
+    Event.record(:uploaded_epub, user_id: current_user.id, epub_id: epub.id)
+
     redirect "/epubs/#{epub.id}"
   end
 

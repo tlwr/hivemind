@@ -1,4 +1,5 @@
 require "bcrypt"
+require "json"
 require "sequel"
 require "time"
 
@@ -49,6 +50,24 @@ class EPub < Sequel::Model
 
   def tags=(tags_arr)
     self.tags = tags_arr.join("\n").reject?(&:empty?)
+  end
+end
+
+class Event < Sequel::Model
+  def self.record(kind, **metadata)
+    e = Event.new
+    e.kind = kind
+    e.metadata = metadata
+    e.save
+    e
+  end
+
+  def metadata
+    JSON.parse(raw_metadata).transform_keys { _1.to_sym }
+  end
+
+  def metadata=(hash)
+    self.raw_metadata = hash.to_json
   end
 end
 

@@ -1,0 +1,11 @@
+<div>
+  <header class="flex mb-32 items-end">
+    <h1 class="text-4xl mr-8">Events</h1>
+  </header>
+
+  <div>
+    <% @latest.select(&:relevant?).each do |event| %>
+      <p class="mt-4"><%= event.nice %></p>
+    <% end %>
+  </div>
+</div>
