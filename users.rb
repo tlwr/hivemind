@@ -2,8 +2,7 @@ require "sinatra"
 
 class Hivemind < Sinatra::Base
   get "/me" do
-    @user = current_user
-    erb :"users/show"
+    redirect current_user.show_path
   end
 
   get %r(/@(?<username>[^/]+)) do
