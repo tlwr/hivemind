@@ -34,6 +34,10 @@ class Hivemind < Sinatra::Base
     redirect "/epubs/#{epub.id}"
   end
 
+  get "/epubs/random" do
+    redirect "/epubs/#{EPub.select(&:id).map(&:id).shuffle.first}"
+  end
+
   get "/epubs/:epub_id" do
     @epub = EPub.find(id: params[:epub_id])
     raise Sinatra::NotFound if @epub.nil?
