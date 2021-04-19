@@ -43,6 +43,7 @@ end
 
 class EPub < Sequel::Model
   many_to_one :uploader, class: :User, key: :uploader_id
+  many_to_many :collections, class: :Collection, join_table: :e_pub_collections
 
   def tags
     tags_arr.split("\n").reject?(&:empty?)
@@ -70,6 +71,15 @@ class Event < Sequel::Model
   def metadata=(hash)
     self.raw_metadata = hash.to_json
   end
+end
+
+class Collection < Sequel::Model
+  many_to_many :epubs, class: :EPub,
+    join_table: :e_pub_collections,
+    left_key: :collection_id, left_primary_key: :id,
+    right_key: :e_pub_id
+
+  many_to_one :creator, class: :User, key: :creator_id
 end
 
 if ["development", "test"].include?ENV["RACK_ENV"]
