@@ -52,6 +52,7 @@ class EPub < Sequel::Model
     self.tags = tags_arr.join("\n").reject?(&:empty?)
   end
 end
+EPub.plugin :lazy_attributes, :epub
 
 class Event < Sequel::Model
   def self.record(kind, **metadata)
