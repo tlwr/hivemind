@@ -57,6 +57,7 @@ class Hivemind < Sinatra::Base
 
     raise Sinatra::NotFound if @epub.cover_blob.nil? || @epub.cover_blob.empty?
 
+    cache_control :public, :max_age => 86400
     content_type @epub.cover_media_type
     @epub.cover_blob
   end
