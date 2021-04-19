@@ -15,7 +15,41 @@
     </p>
 
     <a class="mt-4 inline-block p-4 uppercase tracking-widest bg-indigo-500 hover:bg-indigo-700 text-white outline-none focus:ring ring-indigo-200" href="/epubs/<%= @epub.id %>/read">read epub</a>
+
+    <h2 class="mt-4 text-xl">collections</h2>
+    <% if @epub.collections.empty? %>
+      <p class="">this book is not in any collections</p>
+    <% else %>
+      <ul>
+        <% @epub.collections.sort_by(&:title).each do |col| %>
+          <li><a href="/collections/<%= col.id %>" class="underline hover:text-indigo-500"><%= col.title %></a></li>
+        <% end %>
+      </ul>
+    <% end %>
+
+    <% unless @potential_collections.empty? %>
+      <form method="POST"
+            action="/epubs/<%= @epub.id %>/collections"
+            class="max-w-xs flex flex-col items-start mt-8">
+        <%= csrf_token_hidden_input %>
+
+        <fieldset class="w-full">
+          <label for="collection" class="sr-only">
+            collection
+          </label>
+          <select name="collection_id"
+                  class="w-full p-4 border border-gray-400 focus:border-indigo-500 outline-none focus:ring ring-indigo-200">
+            <% @potential_collections.sort_by(&:title).each do |c| %>
+              <option value="<%= c.id %>"><%= c.title %></option>
+            <% end %>
+          </select>
+        </fieldset>
+
+        <button class="w-full mt-4 p-4 uppercase tracking-widest bg-indigo-500 hover:bg-indigo-700 text-white outline-none focus:ring ring-indigo-200">add to collection</button>
+      </form>
+    <% end %>
   </div>
+
   <div class="">
     <% if @epub.cover_href %>
       <img class="max-w-md" src="<%= @epub.cover_href %>" alt="<%= @epub.title %>"/>

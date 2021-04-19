@@ -48,6 +48,10 @@ class Hivemind < Sinatra::Base
     @epub = EPub.find(id: params[:epub_id])
     raise Sinatra::NotFound if @epub.nil?
 
+    c_ids = @epub.collections.map(&:id)
+    @collections = Collection.all
+    @potential_collections = @collections.reject { |c| c_ids.include? c.id }
+
     erb :"epubs/show"
   end
 
@@ -82,6 +86,18 @@ class Hivemind < Sinatra::Base
       content_type @item.media_type
       @item.content
     end
+  end
+
+  post "/epubs/:epub_id/collections" do
+    @epub = EPub.find(id: params[:epub_id])
+    raise Sinatra::NotFound if @epub.nil?
+
+    @collection = Collection.find(id: params[:collection_id])
+    raise Sinatra::NotFound if @collection.nil?
+
+    @collection.add_epub(@epub)
+
+    redirect "/epubs/#{@epub.id}"
   end
 end
 
