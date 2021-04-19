@@ -69,7 +69,7 @@ end
 
 class EPub < Sequel::Model
   def parsed
-    GEPUB::Book.parse StringIO.new(self.epub.to_s)
+    @parsed ||= GEPUB::Book.parse StringIO.new(self.epub.to_s)
   end
 
   def href_path(href)
