@@ -16,6 +16,8 @@ class Hivemind < Sinatra::Base
 
     col = Collection.create(title: title, creator: current_user)
 
+    Event.record(:created_collection, user_id: current_user.id, collection_id: col.id)
+
     redirect "/collections/#{col.id}"
   end
 
