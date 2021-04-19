@@ -3,15 +3,21 @@ hivemind
 
 Install deps
 
+```
 $ make deps
+```
 
 Run locally:
 
+```
 $ make run
+```
 
 Run tests:
 
+```
 $ make test
+```
 
 ## CSS
 
