@@ -31,6 +31,12 @@ class Hivemind < Sinatra::Base
 
     Event.record(:uploaded_epub, user_id: current_user.id, epub_id: epub.id)
 
+    if epub.cover?
+      epub.cover_blob = epub.cover.content
+      epub.cover_media_type = epub.cover.media_type
+      epub.save
+    end
+
     redirect "/epubs/#{epub.id}"
   end
 
@@ -44,6 +50,17 @@ class Hivemind < Sinatra::Base
 
     erb :"epubs/show"
   end
+
+  get "/epubs/:epub_id/cover" do
+    @epub = EPub.find(id: params[:epub_id])
+    raise Sinatra::NotFound if @epub.nil?
+
+    raise Sinatra::NotFound if @epub.cover_blob.nil? || @epub.cover_blob.empty?
+
+    content_type @epub.cover_media_type
+    @epub.cover_blob
+  end
+
 
   get "/epubs/:epub_id/read" do
     @epub = EPub.find(id: params[:epub_id])
@@ -92,9 +109,17 @@ class EPub < Sequel::Model
     chapters.drop_while { _1.id != item }.drop(1).first&.href
   end
 
+  def cover
+    images.select { |i| i.id =~ /cover/i }.first
+  end
+
+  def cover?
+    !cover.nil?
+  end
+
   def cover_href
-    href = images.select { |i| i.id =~ /cover/i }.first&.href
-    href && href_path(href)
+    return nil if cover_blob.nil? || cover_blob.empty?
+    "/epubs/#{id}/cover"
   end
 
   def first_readable
