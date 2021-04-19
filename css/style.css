@@ -1,3 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.book-cover-thumb:nth-of-type(4n + 1) {
+  @apply col-start-3;
+}

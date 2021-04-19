@@ -9,8 +9,8 @@
       <h2 class="lg:text-2xl text-gray-500 lg:col-span-2"><%= creator %></h2>
 
 
-      <% epubs.each do |epub| # the 4n+1 book are going to need `col-start-3` class added to the a tag %>
-        <a href="/epubs/<%= epub.id %>">
+      <% epubs.each do |epub| %>
+        <a class="book-cover-thumb" href="/epubs/<%= epub.id %>">
           <% if epub.cover_href %>
             <img src="<%= epub.cover_href %>"
                  style="width: 100%; height: auto;"
