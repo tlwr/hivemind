@@ -3,6 +3,38 @@
     <h1 class="text-4xl mr-8">@<%= @user.username %></h1>
   </header>
 
+  <% @user.epub_statuses.group_by(&:status).each do |status, epub_statuses| %>
+    <div class="flex justify-between">
+      <div class="grid grid-cols-3 lg:grid-cols-6 gap-8 items-start border-t py-8">
+        <div class="lg:col-span-2">
+          <h2 class="lg:text-2xl text-gray-500"><%= status.to_s.gsub("_", " ") %></h2>
+
+          <p class="mt-4">
+          <% if epub_statuses.size == 1 %>
+            1 book
+          <% else %>
+            <%= epub_statuses.size %> books
+          <% end %>
+          </p>
+        </div>
+
+        <% epub_statuses.map(&:epub).sort_by(&:creator).each do |epub| %>
+          <a href="/epubs/<%= epub.id %>">
+            <% if epub.cover_href %>
+              <img src="<%= epub.cover_href %>"
+                   style="width: 100%; height: auto;"
+                   alt="<%= epub.title %>"
+                   title="<%= epub.title %>"
+                   />
+            <% else %>
+              <%= epub.title %>
+            <% end %>
+          </a>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+
   <div class="flex justify-between">
     <div class="grid grid-cols-3 lg:grid-cols-6 gap-8 items-start border-t py-8">
       <div class="lg:col-span-2">
@@ -33,35 +65,4 @@
         </a>
       <% end %>
     </div>
-
-    <% @user.epub_statuses.group_by(&:status).each do |status, epub_statuses| %>
-      <div class="grid grid-cols-3 lg:grid-cols-6 gap-8 items-start border-t py-8">
-        <div class="lg:col-span-2">
-          <h2 class="lg:text-2xl text-gray-500"><%= status.to_s.gsub("_", " ") %></h2>
-
-          <p class="mt-4">
-          <% if epub_statuses.size == 1 %>
-            1 book
-          <% else %>
-            <%= epub_statuses.size %> books
-          <% end %>
-          </p>
-        </div>
-
-        <% epub_statuses.map(&:epub).sort_by(&:creator).each do |epub| %>
-          <a href="/epubs/<%= epub.id %>">
-            <% if epub.cover_href %>
-              <img src="<%= epub.cover_href %>"
-                   style="width: 100%; height: auto;"
-                   alt="<%= epub.title %>"
-                   title="<%= epub.title %>"
-                   />
-            <% else %>
-              <%= epub.title %>
-            <% end %>
-          </a>
-        <% end %>
-      </div>
-    <% end %>
-  </div>
 </div>
