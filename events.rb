@@ -20,6 +20,10 @@ class Event < Sequel::Model
       collection_link = %(<a class="underline hover:text-indigo-500" href="/collection/#{collection.id}">#{collection.title}</a>)
 
       "#{user_link} created #{collection_link}"
+    when :read_epub
+      user_link = %(<a class="underline hover:text-indigo-500" href="/@#{user.username}">@#{user.username}</a>)
+      epub_link = %(<a class="underline hover:text-indigo-500" href="/epubs/#{epub.id}">#{epub.title}</a>)
+      "#{user_link} marked #{epub_link} as read"
     end
   end
 
@@ -29,6 +33,8 @@ class Event < Sequel::Model
       epub.nil? || user.nil? ? false : true
     when :created_collection
       collection.nil? || user.nil? ? false : true
+    when :read_epub
+      epub.nil? || user.nil? ? false : true
     end
   end
 

@@ -49,6 +49,8 @@ class User < Sequel::Model
       { user_id: self.id, e_pub_id: epub_id, },
       { status: "has_read" },
     )
+
+    Event.record(:read_epub, user_id: self.id, epub_id: epub_id)
   end
 
   def clear_epub!(epub)
