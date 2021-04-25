@@ -66,6 +66,26 @@ class Hivemind < Sinatra::Base
     @epub.cover_blob
   end
 
+  post "/epubs/:epub_id/status" do
+    @epub = EPub.find(id: params[:epub_id])
+    raise Sinatra::NotFound if @epub.nil?
+
+    status = params[:status]&.gsub("-", "_")&.to_sym
+    raise Sinatra::BadRequest if status.nil?
+
+    case status
+    when :wants_to_read
+      current_user.wants_to_read_epub!(@epub)
+    when :is_reading
+      current_user.is_reading_epub!(@epub)
+    when :has_read
+      current_user.has_read_epub!(@epub)
+    when :clear
+      current_user.clear_epub!(@epub)
+    end
+
+    redirect "/epubs/#{@epub.id}"
+  end
 
   get "/epubs/:epub_id/read" do
     @epub = EPub.find(id: params[:epub_id])

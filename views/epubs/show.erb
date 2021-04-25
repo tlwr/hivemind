@@ -16,6 +16,52 @@
 
     <a class="mt-4 inline-block p-4 uppercase tracking-widest bg-indigo-500 hover:bg-indigo-700 text-white outline-none focus:ring ring-indigo-200" href="/epubs/<%= @epub.id %>/read">read epub</a>
 
+    <div class="mt-4">
+      <% status = current_user.status_for_epub(@epub) %>
+      <p><%=
+          case status
+          when :wants_to_read
+            "you want to read this book"
+          when :is_reading
+            "you are reading this book"
+          when :has_read
+            "you have read this book"
+          end
+      %></p>
+
+      <form action="/epubs/<%= @epub.id %>/status" method="POST" class="space-y-1 space-x-1">
+        <% unless status == :wants_to_read %>
+          <button class="text-xs inline-block p-4 uppercase tracking-widest bg-green-500 hover:bg-green-700 text-white outline-none focus:ring ring-green-200"
+                  name="status" value="wants-to-read">
+          i want to read this book
+        </button>
+        <% end %>
+
+        <% unless status == :is_reading %>
+          <button class="text-xs inline-block p-4 uppercase tracking-widest bg-green-500 hover:bg-green-700 text-white outline-none focus:ring ring-green-200"
+                  name="status" value="is-reading">
+          i am reading this book
+        </a>
+        <% end %>
+
+        <% unless status == :has_read %>
+          <button class="text-xs inline-block p-4 uppercase tracking-widest bg-green-500 hover:bg-green-700 text-white outline-none focus:ring ring-green-200"
+                  name="status" value="has-read">
+          i have read this book
+        </a>
+        <% end %>
+
+        <% unless status.nil? %>
+          <button class="text-xs inline-block p-4 uppercase tracking-widest bg-red-500 hover:bg-red-700 text-white outline-none focus:ring ring-red-200"
+                  name="status" value="clear">
+          clear
+        </a>
+        <% end %>
+
+        <%= csrf_token_hidden_input %>
+      </form>
+    </div>
+
     <h2 class="mt-4 text-xl">collections</h2>
     <% if @epub.collections.empty? %>
       <p class="">this book is not in any collections</p>

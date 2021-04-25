@@ -22,6 +22,7 @@ class User < Sequel::Model
   attr_accessor :password_confirmation
 
   one_to_many :uploaded_epubs, class: :EPub, key: :uploader_id
+  one_to_many :epub_statuses, class: :EPubUserStatus, key: :user_id
 
   def password=(plain)
     @password = plain
@@ -81,6 +82,12 @@ class Collection < Sequel::Model
 
   many_to_one :creator, class: :User, key: :creator_id
 end
+
+class EPubUserStatus < Sequel::Model
+  many_to_one :user, class: :User, key: :user_id
+  many_to_one :epub, class: :EPub, key: :e_pub_id
+end
+EPubUserStatus.plugin :update_or_create
 
 if ["development", "test"].include?ENV["RACK_ENV"]
   unless User.find(username: "test")

@@ -17,3 +17,43 @@ class User < Sequel::Model
     "/@#{username}"
   end
 end
+
+class User < Sequel::Model
+  def status_for_epub(epub)
+    epub_id = epub.is_a?(Numeric) ? epub : epub.id
+    EPubUserStatus.find(e_pub_id: epub_id, user_id: id)&.status&.to_sym
+  end
+
+  def wants_to_read_epub!(epub)
+    epub_id = epub.is_a?(Numeric) ? epub : epub.id
+
+    EPubUserStatus.update_or_create(
+      { user_id: self.id, e_pub_id: epub_id, },
+      { status: "wants_to_read" },
+    )
+  end
+
+  def is_reading_epub!(epub)
+    epub_id = epub.is_a?(Numeric) ? epub : epub.id
+
+    EPubUserStatus.update_or_create(
+      { user_id: self.id, e_pub_id: epub_id, },
+      { status: "is_reading" },
+    )
+  end
+
+  def has_read_epub!(epub)
+    epub_id = epub.is_a?(Numeric) ? epub : epub.id
+
+    EPubUserStatus.update_or_create(
+      { user_id: self.id, e_pub_id: epub_id, },
+      { status: "has_read" },
+    )
+  end
+
+  def clear_epub!(epub)
+    epub_id = epub.is_a?(Numeric) ? epub : epub.id
+
+    EPubUserStatus.where(e_pub_id: epub.id, user_id: self.id)&.delete
+  end
+end
