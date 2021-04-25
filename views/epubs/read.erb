@@ -9,12 +9,6 @@
 <%= erb :"epubs/_nav" %>
 
 <section style="max-width: 32em; margin: 0 auto;">
-  <style>
-  p + p {
-    margin-top: 1em !important;
-  }
-  </style>
-
   <iframe src="<%= @epub.href_path(@item.href) %>"
           type="<%= @item.media_type %>"
           style="width: 100%;"
