@@ -9,6 +9,19 @@
     </td>
 
     <td>
+      <% if @show_bookmark_button %>
+      <form action="/epubs/<%= @epub.id %>/bookmark" method="POST">
+        <input type="hidden" name="href" value="<%= @href %>"/%>
+        <button class="text-xs inline-block p-4 uppercase tracking-widest bg-indigo-500 hover:bg-indigo-700 text-white outline-none focus:ring ring-indigo-200"
+                name="status" value="wants-to-read">
+        bookmark
+        </button>
+        <%= csrf_token_hidden_input %>
+      </form>
+      <% end %>
+    </td>
+
+    <td>
       <% if @epub.next_href(@item.id).nil? %>
       <span>⇥</span>
       <% else %>

@@ -87,6 +87,18 @@ class Hivemind < Sinatra::Base
     redirect "/epubs/#{@epub.id}"
   end
 
+  post "/epubs/:epub_id/bookmark" do
+    @epub = EPub.find(id: params[:epub_id])
+    raise Sinatra::NotFound if @epub.nil?
+
+    href = params[:href]
+    raise Sinatra::BadRequest if href.nil?
+
+    current_user.bookmark_epub!(epub_id=@epub.id, href=href)
+
+    redirect @epub.href_path(href) + "?read#read-start"
+  end
+
   get "/epubs/:epub_id/read" do
     @epub = EPub.find(id: params[:epub_id])
     raise Sinatra::NotFound if @epub.nil?
@@ -101,6 +113,8 @@ class Hivemind < Sinatra::Base
     @item = @epub.parsed.item_by_href(params[:href])
 
     if params.key? :read
+      @href = params[:href]
+      @show_bookmark_button = current_user.bookmark_for_epub(@epub) != @href
       erb :"epubs/read"
     else
       content_type @item.media_type

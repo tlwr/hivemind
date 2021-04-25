@@ -58,4 +58,18 @@ class User < Sequel::Model
 
     EPubUserStatus.where(e_pub_id: epub.id, user_id: self.id)&.delete
   end
+
+  def bookmark_for_epub(epub)
+    epub_id = epub.is_a?(Numeric) ? epub : epub.id
+    EPubUserBookmark.find(e_pub_id: epub_id, user_id: id)&.href
+  end
+
+  def bookmark_epub!(epub, href)
+    epub_id = epub.is_a?(Numeric) ? epub : epub.id
+
+    EPubUserBookmark.update_or_create(
+      { user_id: self.id, e_pub_id: epub_id, },
+      { href: href },
+    )
+  end
 end

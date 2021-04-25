@@ -17,6 +17,7 @@ end
 require_relative "db"
 
 require_relative "authentication"
+require_relative "bookmarks"
 require_relative "collections"
 require_relative "epubs"
 require_relative "events"

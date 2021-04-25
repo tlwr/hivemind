@@ -1,0 +1,27 @@
+<div>
+  <header class="flex mb-32 items-end">
+    <h1 class="text-4xl mr-8">Bookmarks</h1>
+  </header>
+
+  <% if @bookmarks.empty? %>
+    <p>no bookmarks yet</p>
+  <% else %>
+    <div class="flex justify-between">
+      <div class="grid grid-cols-3 lg:grid-cols-6 gap-8 items-start border-t py-8">
+        <% @bookmarks.sort_by { _1.epub.title }.each do |bookmark| %>
+          <a href="<%= bookmark.epub.href_path(bookmark.href) %>?read#read-start">
+            <% if bookmark.epub.cover_href %>
+              <img src="<%= bookmark.epub.cover_href %>"
+                   style="width: 100%; height: auto;"
+                   alt="<%= bookmark.epub.title %>"
+                   title="<%= bookmark.epub.title %>"
+                   />
+            <% else %>
+              <%= bookmark.epub.title %>
+            <% end %>
+          </a>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+</div>
