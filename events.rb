@@ -17,7 +17,7 @@ class Event < Sequel::Model
       "#{user_link} uploaded #{epub_link}"
     when :created_collection
       user_link = %(<a class="underline hover:text-indigo-500" href="/@#{user.username}">@#{user.username}</a>)
-      collection_link = %(<a class="underline hover:text-indigo-500" href="/collection/#{collection.id}">#{collection.title}</a>)
+      collection_link = %(<a class="underline hover:text-indigo-500" href="/collections/#{collection.id}">#{collection.title}</a>)
 
       "#{user_link} created #{collection_link}"
     when :read_epub
