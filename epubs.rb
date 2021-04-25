@@ -81,7 +81,7 @@ class Hivemind < Sinatra::Base
     when :has_read
       current_user.has_read_epub!(@epub)
     when :clear
-      current_user.clear_epub!(@epub)
+      current_user.clear_epub_status!(@epub)
     end
 
     redirect "/epubs/#{@epub.id}"

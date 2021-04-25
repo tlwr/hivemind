@@ -53,7 +53,7 @@ class User < Sequel::Model
     Event.record(:read_epub, user_id: self.id, epub_id: epub_id)
   end
 
-  def clear_epub!(epub)
+  def clear_epub_status!(epub)
     epub_id = epub.is_a?(Numeric) ? epub : epub.id
 
     EPubUserStatus.where(e_pub_id: epub.id, user_id: self.id)&.delete
