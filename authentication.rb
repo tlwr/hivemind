@@ -35,9 +35,12 @@ class Hivemind < Sinatra::Base
 
   helpers do
     def current_user
+      return @current_user unless @current_user.nil?
+
       username = session[:current_user]
       return nil if username.nil? || username.empty?
-      User.find(username: username)
+
+      @current_user = User.find(username: username)
     end
 
     def csrf_token_hidden_input
