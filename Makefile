@@ -1,4 +1,4 @@
-.PHONY: list test spec deps run
+.PHONY: list test spec deps run console
 list:
 	@echo available tasks
 	@cat Makefile | grep -v PHONY | grep -v list | grep -Eo '^[^:]+: ?' | sed 's/:.*$$//' | sed 's/^/  - /'
