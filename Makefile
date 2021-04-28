@@ -12,7 +12,7 @@ deps:
 	bundle install
 
 run:
-	bundle exec rackup
+	bundle exec thin start -R config.ru -C config/thin.yml -p 9292
 
 console:
 	./bin/console

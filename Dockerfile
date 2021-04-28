@@ -21,4 +21,4 @@ RUN npm run css:build
 
 COPY $PWD .
 
-ENTRYPOINT ["rackup"]
+ENTRYPOINT ["make", "run"]

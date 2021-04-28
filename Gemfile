@@ -4,6 +4,7 @@ gem "gepub"
 
 gem "rack-protection"
 gem "sinatra"
+gem "thin"
 
 gem "sequel"
 gem "sqlite3"
