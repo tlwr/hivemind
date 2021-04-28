@@ -10,6 +10,7 @@ spec: test
 
 deps:
 	bundle install
+	yarn install
 
 run:
 	bundle exec thin start -R config.ru -C config/thin.yml -p 9292

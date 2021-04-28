@@ -13,11 +13,11 @@ RUN bundle install
 
 COPY $PWD/package.json .
 
-RUN npm install
+RUN yarn install
 
 COPY $PWD/postcss.config.js .
 COPY $PWD/css/style.css ./css/style.css
-RUN npm run css:build
+RUN yarn run css:build
 
 COPY $PWD .
 
