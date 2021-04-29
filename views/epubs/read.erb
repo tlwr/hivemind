@@ -32,3 +32,26 @@
 </section>
 
 <%= erb :"epubs/_nav" %>
+
+<script>
+// TODO - inline script is bad  
+(function(){
+  'use strict'
+  const links = document.querySelectorAll('td a') // TODO - make this selector more specific
+  const prevLink = links[0] // TODO - what if this is undefined?
+  const nextLink = links[1] // TODO - what if this is undefined?
+  const prev = () => prevLink.click()
+  const next = () => nextLink.click()
+  document.addEventListener('keydown', (e) => {
+    switch(e.key) {
+    // TODO - could be bad for accessibility - do users actually expect the arrow keys to change page, rather than their default actions?
+    case 'ArrowRight':
+        next()
+        break
+    case 'ArrowLeft':
+        prev()
+        break
+    }
+  })
+})()
+</script>
