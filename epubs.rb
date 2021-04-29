@@ -191,6 +191,7 @@ class EPub < Sequel::Model
     chapters.find { |v| v.id =~ /preface/i } ||
     chapters.find { |v| v.id =~ /foreword/i } ||
     chapters.find { |v| v.id =~ /chapter/i } ||
+    chapters.find { |v| v.id =~ /content/i } ||
     chapters.first
   end
 end
