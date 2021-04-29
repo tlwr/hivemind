@@ -1,10 +1,19 @@
 <div>
-  <h1><%= @epub.title %></h1>
+  <header class="flex mb-8 items-end">
+    <h1 class="text-4xl mr-8"><%= @epub.title %></h1>
+  </header>
 
-  <p><a href="/epubs/<%= @epub.id %>">view epub</a></p>
+  <p class="text-gray-500 mr-8">
+    <a class="underline hover:text-indigo-500" href="/epubs/<%= @epub.id %>">view epub</a>
+  </p>
 
   <% if @epub.table_of_contents? %>
-    <p><a href="<%= @epub.href_path(@epub.table_of_contents.href)%>?read#read-start">table of contents</a></p>
+    <p class="text-gray-500">
+      <a class="underline hover:text-indigo-500"
+         href="<%= @epub.href_path(@epub.table_of_contents.href)%>?read#read-start">
+        table of contents
+      </a>
+    </p>
   <% end %>
 </div>
 
