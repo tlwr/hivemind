@@ -173,6 +173,17 @@ class EPub < Sequel::Model
     "/epubs/#{id}/cover"
   end
 
+  def table_of_contents
+    chapters.select { |c| c.id =~ /contents/i }.first ||
+      chapters.select { |c| c.id =~ /toc/i }.first ||
+      chapters.select { |c| c.id =~ /table/i }.first ||
+      chapters.select { |c| c.id =~ /content/i }.first
+  end
+
+  def table_of_contents?
+    !table_of_contents.nil?
+  end
+
   def first_readable
     chapters.find { |v| v.id =~ /cover/i } ||
     chapters.find { |v| v.id =~ /toc/i } ||
