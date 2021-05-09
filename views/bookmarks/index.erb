@@ -9,17 +9,25 @@
     <div class="flex justify-between">
       <div class="grid grid-cols-3 lg:grid-cols-6 gap-8 items-start border-t py-8">
         <% @bookmarks.sort_by { _1.epub.title }.each do |bookmark| %>
-          <a href="<%= bookmark.epub.href_path(bookmark.href) %>?read#read-start">
-            <% if bookmark.epub.cover_href %>
-              <img src="<%= bookmark.epub.cover_href %>"
-                   style="width: 100%; height: auto;"
-                   alt="<%= bookmark.epub.title %>"
-                   title="<%= bookmark.epub.title %>"
-                   />
-            <% else %>
-              <%= bookmark.epub.title %>
-            <% end %>
-          </a>
+          <div>
+            <a href="<%= bookmark.epub.href_path(bookmark.href) %>?read#read-start">
+              <% if bookmark.epub.cover_href %>
+                <img src="<%= bookmark.epub.cover_href %>"
+                     style="width: 100%; height: auto;"
+                     alt="<%= bookmark.epub.title %>"
+                     title="<%= bookmark.epub.title %>"
+                     />
+              <% else %>
+                <%= bookmark.epub.title %>
+              <% end %>
+            </a>
+            <form method="POST" action="/bookmarks/<%= bookmark.id %>/delete">
+              <button class="w-full mt-6 p-4 uppercase tracking-widest bg-indigo-500 hover:bg-indigo-700 text-white outline-none focus:ring ring-indigo-200">
+                delete
+              </button>
+              <%= csrf_token_hidden_input %>
+            </form>
+          </div>
         <% end %>
       </div>
     </div>
