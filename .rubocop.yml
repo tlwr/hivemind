@@ -1,0 +1,27 @@
+---
+require:
+  - rubocop-minitest
+  - rubocop-performance
+  - rubocop-rake
+  - rubocop-rspec
+
+inherit_gem:
+  rubocop-govuk:
+    - config/default.yml
+    - config/rspec.yml
+
+inherit_mode:
+  merge:
+    - Exclude
+
+RSpec/BeforeAfterAll:
+  Enabled: false
+
+RSpec/InstanceVariable:
+  Enabled: false
+
+Style/SymbolArray:
+  Enabled: false
+
+Style/WordArray:
+  Enabled: false

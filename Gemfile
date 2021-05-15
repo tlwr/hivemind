@@ -18,4 +18,9 @@ end
 group :development do
   gem "pry"
   gem "webrick"
+
+  gem "rubocop"
+  gem "rubocop-govuk"
+  gem "rubocop-performance"
+  gem "rubocop-rspec"
 end
