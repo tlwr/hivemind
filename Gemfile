@@ -7,7 +7,7 @@ gem "sinatra"
 gem "thin"
 
 gem "sequel"
-gem 'sequel_secure_password'
+gem "sequel_secure_password"
 gem "sqlite3"
 
 group :test do
