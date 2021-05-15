@@ -189,12 +189,12 @@ class EPub < Sequel::Model
 
   def first_readable
     chapters.find { |v| v.id =~ /cover/i } ||
-    chapters.find { |v| v.id =~ /toc/i } ||
-    chapters.find { |v| v.id =~ /contents/i } ||
-    chapters.find { |v| v.id =~ /preface/i } ||
-    chapters.find { |v| v.id =~ /foreword/i } ||
-    chapters.find { |v| v.id =~ /chapter/i } ||
-    chapters.find { |v| v.id =~ /content/i } ||
-    chapters.first
+      chapters.find { |v| v.id =~ /toc/i } ||
+      chapters.find { |v| v.id =~ /contents/i } ||
+      chapters.find { |v| v.id =~ /preface/i } ||
+      chapters.find { |v| v.id =~ /foreword/i } ||
+      chapters.find { |v| v.id =~ /chapter/i } ||
+      chapters.find { |v| v.id =~ /content/i } ||
+      chapters.first
   end
 end
