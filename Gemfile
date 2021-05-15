@@ -7,12 +7,12 @@ gem "sinatra"
 gem "thin"
 
 gem "sequel"
-gem "sqlite3"
 gem 'sequel_secure_password'
+gem "sqlite3"
 
 group :test do
-  gem "rspec"
   gem "rack-test"
+  gem "rspec"
 end
 
 group :development do
