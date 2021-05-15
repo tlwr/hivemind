@@ -161,7 +161,10 @@ class EPub < Sequel::Model
   end
 
   def cover
-    images.select { |i| i.id =~ /cover/i }.first
+    cover_from_id = images.select { |i| i.id =~ /cover/i }.first
+    cover_from_href = images.select { |i| i.href =~ /cover/i }.first
+
+    cover_from_id || cover_from_href
   end
 
   def cover?
