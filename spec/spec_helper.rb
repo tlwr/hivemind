@@ -36,4 +36,10 @@ def login
   follow_redirect!
 
   expect(last_response).to be_ok
+
+  @logged_in = true
+end
+
+def ensure_logged_in
+  login unless @logged_in
 end
