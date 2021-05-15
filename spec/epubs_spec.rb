@@ -63,11 +63,11 @@ RSpec.describe "epubs" do
       end
 
       it "has a cover" do
-        expect(@epub.cover?).to be_truthy
+        expect(@epub.cover?).not_to be_nil
       end
 
       it "has a table of contents" do
-        expect(@epub.table_of_contents?).to be_truthy
+        expect(@epub.table_of_contents).not_to be_nil
       end
 
       it "has some images" do
