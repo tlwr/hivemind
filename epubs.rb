@@ -161,8 +161,8 @@ class EPub < Sequel::Model
   end
 
   def cover
-    cover_from_id = images.select { |i| i.id =~ /cover/i }.first
-    cover_from_href = images.select { |i| i.href =~ /cover/i }.first
+    cover_from_id = images.find { |i| i.id =~ /cover/i }
+    cover_from_href = images.find { |i| i.href =~ /cover/i }
 
     cover_from_id || cover_from_href
   end
@@ -177,10 +177,10 @@ class EPub < Sequel::Model
   end
 
   def table_of_contents
-    chapters.select { |c| c.id =~ /contents/i }.first ||
-      chapters.select { |c| c.id =~ /toc/i }.first ||
-      chapters.select { |c| c.id =~ /table/i }.first ||
-      chapters.select { |c| c.id =~ /content/i }.first
+    chapters.find { |c| c.id =~ /contents/i } ||
+      chapters.find { |c| c.id =~ /toc/i } ||
+      chapters.find { |c| c.id =~ /table/i } ||
+      chapters.find { |c| c.id =~ /content/i }
   end
 
   def table_of_contents?
