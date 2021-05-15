@@ -28,7 +28,7 @@ class User < Sequel::Model
     epub_id = epub.is_a?(Numeric) ? epub : epub.id
 
     EPubUserStatus.update_or_create(
-      { user_id: self.id, e_pub_id: epub_id, },
+      { user_id: id, e_pub_id: epub_id, },
       { status: "wants_to_read" },
     )
   end
@@ -37,7 +37,7 @@ class User < Sequel::Model
     epub_id = epub.is_a?(Numeric) ? epub : epub.id
 
     EPubUserStatus.update_or_create(
-      { user_id: self.id, e_pub_id: epub_id, },
+      { user_id: id, e_pub_id: epub_id, },
       { status: "is_reading" },
     )
   end
@@ -46,17 +46,17 @@ class User < Sequel::Model
     epub_id = epub.is_a?(Numeric) ? epub : epub.id
 
     EPubUserStatus.update_or_create(
-      { user_id: self.id, e_pub_id: epub_id, },
+      { user_id: id, e_pub_id: epub_id, },
       { status: "has_read" },
     )
 
-    Event.record(:read_epub, user_id: self.id, epub_id: epub_id)
+    Event.record(:read_epub, user_id: id, epub_id: epub_id)
   end
 
   def clear_epub_status!(epub)
     epub_id = epub.is_a?(Numeric) ? epub : epub.id
 
-    EPubUserStatus.where(e_pub_id: epub.id, user_id: self.id)&.delete
+    EPubUserStatus.where(e_pub_id: epub.id, user_id: id)&.delete
   end
 
   def bookmark_for_epub(epub)
@@ -68,7 +68,7 @@ class User < Sequel::Model
     epub_id = epub.is_a?(Numeric) ? epub : epub.id
 
     EPubUserBookmark.update_or_create(
-      { user_id: self.id, e_pub_id: epub_id, },
+      { user_id: id, e_pub_id: epub_id, },
       { href: href },
     )
   end
