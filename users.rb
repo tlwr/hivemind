@@ -28,7 +28,7 @@ class User < Sequel::Model
     epub_id = epub.is_a?(Numeric) ? epub : epub.id
 
     EPubUserStatus.update_or_create(
-      { user_id: id, e_pub_id: epub_id, },
+      { user_id: id, e_pub_id: epub_id },
       { status: "wants_to_read" },
     )
   end
@@ -37,7 +37,7 @@ class User < Sequel::Model
     epub_id = epub.is_a?(Numeric) ? epub : epub.id
 
     EPubUserStatus.update_or_create(
-      { user_id: id, e_pub_id: epub_id, },
+      { user_id: id, e_pub_id: epub_id },
       { status: "is_reading" },
     )
   end
@@ -46,7 +46,7 @@ class User < Sequel::Model
     epub_id = epub.is_a?(Numeric) ? epub : epub.id
 
     EPubUserStatus.update_or_create(
-      { user_id: id, e_pub_id: epub_id, },
+      { user_id: id, e_pub_id: epub_id },
       { status: "has_read" },
     )
 
@@ -68,7 +68,7 @@ class User < Sequel::Model
     epub_id = epub.is_a?(Numeric) ? epub : epub.id
 
     EPubUserBookmark.update_or_create(
-      { user_id: id, e_pub_id: epub_id, },
+      { user_id: id, e_pub_id: epub_id },
       { href: href },
     )
   end
