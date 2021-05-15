@@ -21,7 +21,7 @@ RSpec.describe "epubs" do
       before(:all) do
         upload_pride_and_prejudice
 
-        epub_id = last_request.url[%r(/epubs/(\d+)), 1].to_i
+        epub_id = last_request.url[%r{/epubs/(\d+)}, 1].to_i
         @epub = EPub.find(id: epub_id)
       end
 
@@ -44,7 +44,7 @@ RSpec.describe "epubs" do
       before(:all) do
         upload_halma
 
-        epub_id = last_request.url[%r(/epubs/(\d+)), 1].to_i
+        epub_id = last_request.url[%r{/epubs/(\d+)}, 1].to_i
         @epub = EPub.find(id: epub_id)
       end
 

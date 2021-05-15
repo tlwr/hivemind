@@ -5,7 +5,7 @@ class Hivemind < Sinatra::Base
     redirect current_user.show_path
   end
 
-  get %r(/@(?<username>[^/]+)) do
+  get %r{/@(?<username>[^/]+)} do
     @user = User.find(username: params[:username])
     raise Sinatra::NotFound if @user.nil?
     erb :"users/show"
