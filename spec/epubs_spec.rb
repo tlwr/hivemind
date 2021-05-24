@@ -10,7 +10,7 @@ RSpec.describe "epubs" do
     end
 
     it "uploads an ebook" do
-      upload_pride_and_prejudice
+      ensure_pride_and_prejudice_uploaded
 
       expect(last_response).to be_ok
       expect(last_response.body).to match(/pride and prejudice/i)
@@ -18,12 +18,7 @@ RSpec.describe "epubs" do
     end
 
     describe "pride and prejudice" do
-      before(:all) do
-        upload_pride_and_prejudice
-
-        epub_id = last_request.url[%r{/epubs/(\d+)}, 1].to_i
-        @epub = EPub.find(id: epub_id)
-      end
+      before(:all) { @epub = ensure_pride_and_prejudice_uploaded }
 
       it "can be parsed" do
         expect { @epub.parsed }.not_to raise_exception
@@ -41,12 +36,7 @@ RSpec.describe "epubs" do
     end
 
     describe "halma" do
-      before(:all) do
-        upload_halma
-
-        epub_id = last_request.url[%r{/epubs/(\d+)}, 1].to_i
-        @epub = EPub.find(id: epub_id)
-      end
+      before(:all) { @epub = ensure_halma_uploaded }
 
       it "can be parsed" do
         expect { @epub.parsed }.not_to raise_exception
@@ -75,27 +65,10 @@ RSpec.describe "epubs" do
       end
     end
   end
-end
 
-def upload_pride_and_prejudice
-  upload_epub("pride-and-prejudice.epub")
-end
 
-def upload_halma
-  upload_epub("halma.epub")
-end
 
-def upload_epub(path)
-  ensure_logged_in
 
-  get "/epubs/upload"
-  expect(last_response).to be_ok
 
-  post "/epubs/upload", {
-    "epub" => Rack::Test::UploadedFile.new(fixture_path(path)),
-    "authenticity_token" => token_from_current_page,
-  }
 
-  expect(last_response).to be_redirect
-  follow_redirect!
 end
