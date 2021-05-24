@@ -11,7 +11,7 @@
   <body class="font-serif min-h-screen p-4 lg:px-8 bg-gray-50">
     <div class="max-w-6xl mx-auto">
       <header>
-        <nav class="flex justify-between items-end mb-8 border-b pb-4">
+        <nav class="flex flex-col items-start md:flex-row md:justify-between md:items-end mb-8 border-b pb-4">
           <h1 class="text-2xl lg:text-4xl mr-8 lg:mr-16">🐝🧠 <span class="sr-only">hive mind</span></h1>
           <% if current_user %>
             <a class="transition duration-200 ease-in-out border-b-2 border-black hover:border-indigo-500 hover:text-indigo-500 mr-4 lg:mr-8" href="/epubs">books</a>
@@ -21,7 +21,7 @@
             <a class="transition duration-200 ease-in-out border-b-2 border-black hover:border-indigo-500 hover:text-indigo-500 mr-4 lg:mr-8" href="/collections">collections</a>
             <a class="transition duration-200 ease-in-out border-b-2 border-black hover:border-indigo-500 hover:text-indigo-500 mr-4 lg:mr-8" href="/bookmarks">bookmarks</a>
             <a class="transition duration-200 ease-in-out border-b-2 border-black hover:border-indigo-500 hover:text-indigo-500 mr-4 lg:mr-8" href="/epubs/upload">upload book</a>
-            <span class="ml-auto">
+            <span class="md:ml-auto flex flex-col md:flex-row">
               <a class="transition duration-200 ease-in-out border-b-2 border-black hover:border-indigo-500 hover:text-indigo-500 mr-4 lg:mr-8" href="/me">@<%= current_user.username %></a>
               <a class="transition duration-200 ease-in-out border-b-2 border-black hover:border-indigo-500 hover:text-indigo-500" href="/logout">log out</a>
             </span>
