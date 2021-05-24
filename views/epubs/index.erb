@@ -1,13 +1,15 @@
 <div>
   <header class="flex mb-32 items-end">
     <h1 class="text-4xl mr-8">books</h1>
-    <p class="text-gray-500"><%= @epubs.count %> books in library</p>
+    <p class="text-gray-500">
+      <%= @epubs.count %> books in library
+      <% if @author %>for <%= @author %><% end %>
+    </p>
   </header>
 
   <% @epubs.group_by(&:creator).sort_by { _1 }.each do |creator, epubs| %>
     <div class="grid grid-cols-3 lg:grid-cols-6 gap-8 items-start border-t py-8">
       <h2 class="lg:text-2xl text-gray-500 lg:col-span-2"><%= creator %></h2>
-
 
       <% epubs.each do |epub| %>
         <a class="book-cover-thumb" href="/epubs/<%= epub.id %>">

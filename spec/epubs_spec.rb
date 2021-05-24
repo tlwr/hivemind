@@ -66,9 +66,40 @@ RSpec.describe "epubs" do
     end
   end
 
+  describe "index" do
+      before(:all) do
+        ensure_halma_uploaded
+        ensure_pride_and_prejudice_uploaded
+      end
 
+      context "when there is no author param" do
+        it "shows all books" do
+          get "/epubs"
 
+          expect(last_response).to be_ok
 
+          expect(last_response.body).to match(/pride and prejudice/i)
+          expect(last_response.body).to match(/jane austen/i)
 
+          expect(last_response.body).to match(/halma/i)
+          expect(last_response.body).to match(/benito/i)
+        end
+      end
 
+      context "when there is author param" do
+        it "shows only the books from that author" do
+          get "/epubs?author=Jane%20Austen"
+
+          expect(last_response).to be_ok
+
+          expect(last_response.body).to match(/pride and prejudice/i)
+          expect(last_response.body).to match(/jane austen/i)
+
+          expect(last_response.body).to match(/\d books in library\s+for jane austen/i)
+
+          expect(last_response.body).not_to match(/halma/i)
+          expect(last_response.body).not_to match(/benito/i)
+        end
+      end
+  end
 end

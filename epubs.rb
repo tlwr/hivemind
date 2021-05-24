@@ -3,7 +3,14 @@ require "sinatra"
 
 class Hivemind < Sinatra::Base
   get "/epubs" do
-    @epubs = EPub.all
+    @author = params[:author]
+
+    @epubs = if (@author || "").empty?
+               EPub.all
+             else
+               EPub.where(creator: @author).all
+             end
+
     erb :"epubs/index"
   end
 
