@@ -6,7 +6,7 @@ class Hivemind < Sinatra::Base
   end
 
   get "/authors" do
-    @authors = EPub.select(:creator).map(&:creator)
+    @authors = EPub.select(:creator).map(&:creator).uniq
     erb :"pages/authors"
   end
 end
