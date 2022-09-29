@@ -695,9 +695,9 @@ modern-normalize@^1.1.0:
   version "1.1.0"
   resolved "https://registry.npmjs.org/modern-normalize/-/modern-normalize-1.1.0.tgz"
 
-nanoid@^3.3.1:
-  version "3.3.1"
-  resolved "https://registry.npmjs.org/nanoid/-/nanoid-3.3.1.tgz"
+nanoid@^3.3.4:
+  version "3.3.4"
+  resolved "https://registry.yarnpkg.com/nanoid/-/nanoid-3.3.4.tgz#730b67e3cd09e2deacf03c027c81c9d9dbc5e8ab"
 
 node-emoji@^1.11.0:
   version "1.11.0"
@@ -1005,10 +1005,10 @@ postcss-value-parser@^4.1.0, postcss-value-parser@^4.2.0:
   resolved "https://registry.npmjs.org/postcss-value-parser/-/postcss-value-parser-4.2.0.tgz"
 
 postcss@^8.1.6, postcss@^8.2.1, postcss@^8.3.5:
-  version "8.4.7"
-  resolved "https://registry.npmjs.org/postcss/-/postcss-8.4.7.tgz"
+  version "8.4.16"
+  resolved "https://registry.yarnpkg.com/postcss/-/postcss-8.4.16.tgz#33a1d675fac39941f5f445db0de4db2b6e01d43c"
   dependencies:
-    nanoid "^3.3.1"
+    nanoid "^3.3.4"
     picocolors "^1.0.0"
     source-map-js "^1.0.2"
 
