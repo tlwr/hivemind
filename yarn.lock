@@ -89,10 +89,6 @@ arg@^5.0.1:
   version "5.0.1"
   resolved "https://registry.npmjs.org/arg/-/arg-5.0.1.tgz"
 
-array-union@^3.0.1:
-  version "3.0.1"
-  resolved "https://registry.npmjs.org/array-union/-/array-union-3.0.1.tgz"
-
 autoprefixer@^10.2.5:
   version "10.4.13"
   resolved "https://registry.yarnpkg.com/autoprefixer/-/autoprefixer-10.4.13.tgz#b5136b59930209a321e9fa3dca2e7c4d223e83a8"
@@ -431,6 +427,16 @@ escape-string-regexp@^1.0.5:
   version "1.0.5"
   resolved "https://registry.npmjs.org/escape-string-regexp/-/escape-string-regexp-1.0.5.tgz"
 
+fast-glob@^3.2.11:
+  version "3.2.12"
+  resolved "https://registry.yarnpkg.com/fast-glob/-/fast-glob-3.2.12.tgz#7f39ec99c2e6ab030337142da9e0c18f37afae80"
+  dependencies:
+    "@nodelib/fs.stat" "^2.0.2"
+    "@nodelib/fs.walk" "^1.2.3"
+    glob-parent "^5.1.2"
+    merge2 "^1.3.0"
+    micromatch "^4.0.4"
+
 fast-glob@^3.2.7:
   version "3.2.11"
   resolved "https://registry.npmjs.org/fast-glob/-/fast-glob-3.2.11.tgz"
@@ -508,14 +514,13 @@ glob@^7.1.3, glob@^7.1.7:
     once "^1.3.0"
     path-is-absolute "^1.0.0"
 
-globby@^12.0.0:
-  version "12.2.0"
-  resolved "https://registry.npmjs.org/globby/-/globby-12.2.0.tgz"
+globby@^13.0.0:
+  version "13.1.2"
+  resolved "https://registry.yarnpkg.com/globby/-/globby-13.1.2.tgz#29047105582427ab6eca4f905200667b056da515"
   dependencies:
-    array-union "^3.0.1"
     dir-glob "^3.0.1"
-    fast-glob "^3.2.7"
-    ignore "^5.1.9"
+    fast-glob "^3.2.11"
+    ignore "^5.2.0"
     merge2 "^1.4.1"
     slash "^4.0.0"
 
@@ -553,9 +558,9 @@ html-tags@^3.1.0:
   version "3.1.0"
   resolved "https://registry.npmjs.org/html-tags/-/html-tags-3.1.0.tgz"
 
-ignore@^5.1.9:
+ignore@^5.2.0:
   version "5.2.0"
-  resolved "https://registry.npmjs.org/ignore/-/ignore-5.2.0.tgz"
+  resolved "https://registry.yarnpkg.com/ignore/-/ignore-5.2.0.tgz#6d3bac8fa7fe0d45d9f9be7bac2fc279577e345a"
 
 import-fresh@^3.2.1:
   version "3.3.0"
@@ -643,6 +648,10 @@ jsonfile@^6.0.1:
 lilconfig@^2.0.3, lilconfig@^2.0.4:
   version "2.0.4"
   resolved "https://registry.npmjs.org/lilconfig/-/lilconfig-2.0.4.tgz"
+
+lilconfig@^2.0.5:
+  version "2.0.6"
+  resolved "https://registry.yarnpkg.com/lilconfig/-/lilconfig-2.0.6.tgz#32a384558bd58af3d4c6e077dd1ad1d397bc69d4"
 
 lines-and-columns@^1.1.6:
   version "1.2.4"
@@ -781,17 +790,17 @@ postcss-calc@^8.2.3:
     postcss-selector-parser "^6.0.9"
     postcss-value-parser "^4.2.0"
 
-postcss-cli@^9.0.0:
-  version "9.1.0"
-  resolved "https://registry.npmjs.org/postcss-cli/-/postcss-cli-9.1.0.tgz"
+postcss-cli@^10.0.0:
+  version "10.0.0"
+  resolved "https://registry.yarnpkg.com/postcss-cli/-/postcss-cli-10.0.0.tgz#404e468d1ff39fb5ead3f707e2021be7cd3f8c9f"
   dependencies:
     chokidar "^3.3.0"
     dependency-graph "^0.11.0"
     fs-extra "^10.0.0"
     get-stdin "^9.0.0"
-    globby "^12.0.0"
+    globby "^13.0.0"
     picocolors "^1.0.0"
-    postcss-load-config "^3.0.0"
+    postcss-load-config "^4.0.0"
     postcss-reporter "^7.0.0"
     pretty-hrtime "^1.0.3"
     read-cache "^1.0.0"
@@ -837,12 +846,19 @@ postcss-js@^3.0.3:
     camelcase-css "^2.0.1"
     postcss "^8.1.6"
 
-postcss-load-config@^3.0.0, postcss-load-config@^3.1.0:
+postcss-load-config@^3.1.0:
   version "3.1.3"
   resolved "https://registry.npmjs.org/postcss-load-config/-/postcss-load-config-3.1.3.tgz"
   dependencies:
     lilconfig "^2.0.4"
     yaml "^1.10.2"
+
+postcss-load-config@^4.0.0:
+  version "4.0.1"
+  resolved "https://registry.yarnpkg.com/postcss-load-config/-/postcss-load-config-4.0.1.tgz#152383f481c2758274404e4962743191d73875bd"
+  dependencies:
+    lilconfig "^2.0.5"
+    yaml "^2.1.1"
 
 postcss-merge-longhand@^5.1.7:
   version "5.1.7"
@@ -1253,6 +1269,10 @@ y18n@^5.0.5:
 yaml@^1.10.0, yaml@^1.10.2:
   version "1.10.2"
   resolved "https://registry.npmjs.org/yaml/-/yaml-1.10.2.tgz"
+
+yaml@^2.1.1:
+  version "2.1.3"
+  resolved "https://registry.yarnpkg.com/yaml/-/yaml-2.1.3.tgz#9b3a4c8aff9821b696275c79a8bee8399d945207"
 
 yargs-parser@^21.0.0:
   version "21.0.1"
