@@ -116,7 +116,7 @@ metadata:
 spec:
   tls:
     - hosts:
-        - weather.tobys.cloud
+        - hivemind.tobys.cloud
       secretName: hivemind-tobys-cloud-tls
   rules:
     - host: hivemind.tobys.cloud
