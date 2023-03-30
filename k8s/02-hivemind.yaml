@@ -89,21 +89,6 @@ spec:
 ...
 
 ---
-apiVersion: cert-manager.io/v1
-kind: Certificate
-metadata:
-  name: hivemind-tobys-cloud
-  namespace: hivemind
-spec:
-  secretName: hivemind-tobys-cloud-tls
-  dnsNames:
-    - hivemind.tobys.cloud
-  issuerRef:
-    name: letsencrypt-prod
-    kind: ClusterIssuer
-...
-
----
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
@@ -111,7 +96,7 @@ metadata:
   namespace: hivemind
   annotations:
     kubernetes.io/ingress.class: "nginx"
-    certmanager.k8s.io/issuer: "letsencrypt-prod"
+    cert-manager.io/cluster-issuer: letsencrypt-prod
     acme.cert-manager.io/http01-edit-in-place: "true"
 spec:
   tls:
