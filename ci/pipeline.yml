@@ -93,7 +93,7 @@ jobs:
           image_resource:
             type: registry-image
             source:
-              repository: vito/oci-build-task
+              repository: concourse/oci-build-task
               tag: 0.3.0
 
           inputs:
