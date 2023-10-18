@@ -94,7 +94,6 @@ jobs:
             type: registry-image
             source:
               repository: concourse/oci-build-task
-              tag: 0.3.0
 
           inputs:
             - name: hivemind-src
